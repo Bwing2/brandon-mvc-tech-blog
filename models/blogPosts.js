@@ -18,6 +18,7 @@ Posts.init(
     date_created: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
     post_content: {
       type: DataTypes.STRING,
@@ -27,7 +28,7 @@ Posts.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "user",
+        model: "users",
         key: "id",
       },
     },
@@ -37,7 +38,7 @@ Posts.init(
     timestamps: false,
     freezerTableName: true,
     underscored: true,
-    modelName: "users",
+    modelName: "posts",
   }
 );
 

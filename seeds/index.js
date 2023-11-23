@@ -1,11 +1,14 @@
-const seedPostTags = require("./blogPostSeeds");
+const seedPostData = require("./blogPostSeeds");
+const seedUserData = require("./userSeeds");
 
 const sequelize = require("../config/connection");
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
 
-  await seedPostTags();
+  await seedUserData();
+
+  await seedPostData();
   console.log("Seeding was successful!");
 
   process.exit(0);

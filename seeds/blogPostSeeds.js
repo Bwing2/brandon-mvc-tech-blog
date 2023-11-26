@@ -14,6 +14,12 @@ const blogPostData = [
     post_content:
       "This test isn't as good, but I am still satisfied with the results.",
   },
+  {
+    user_id: 3,
+    title: "Test 3",
+    date: "September 20th 2023",
+    post_content: "This test was just alright, nothing special.",
+  },
 ];
 
 const seedPostData = () => Posts.bulkCreate(blogPostData);

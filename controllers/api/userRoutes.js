@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Users } = require("../../models");
 
 // Post route for login
-router.post("/", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     // Looks for valid name where it matches in req.body.name
     const userData = await Users.findOne({
@@ -48,6 +48,25 @@ router.post("/logout", (req, res) => {
     });
   } else {
     res.status(404).end();
+  }
+});
+
+// Post route for signup
+router.post("/signup", async (req, res) => {
+  try {
+    const newUser = await Users.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    req.session.save(() => {
+      req.session.user_id = newUser.id;
+      req.session.logged_in = true;
+    });
+    res.status(200).json(newUser);
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 

@@ -28,15 +28,15 @@ Users.init(
       },
     },
   },
-  {
-    // Occurs before password is stored, password is hashed 10 rounds and reassigned back to "newUser"
-    hooks: {
-      beforeCreate: async (newUser) => {
-        newUser.password = await bcrypt.hash(newUser.password, 10);
-        return newUser;
-      },
-    },
-  },
+  // {
+  //   // Occurs before password is stored, password is hashed 10 rounds and reassigned back to "newUser"
+  //   hooks: {
+  //     beforeCreate: async (newUser) => {
+  //       newUser.password = await bcrypt.hash(newUser.password, 10);
+  //       return newUser;
+  //     },
+  //   },
+  // },
   {
     sequelize,
     timestamps: false,

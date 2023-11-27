@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Users } = require("../../models");
 
 // Post route for login
-router.post("/login", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     // Looks for valid name where it matches in req.body.name
     const userData = await Users.findOne({

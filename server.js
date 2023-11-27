@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Session middleware
 const sess = {
-  secret: process.end.DB_SESSION_SECRET,
+  secret: process.env.DB_SESSION_SECRET,
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
   },

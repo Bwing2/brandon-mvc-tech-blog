@@ -1,0 +1,22 @@
+// Logs out user and brings them back to homepage if successful
+const logoutFormHandler = async () => {
+  try {
+    const res = await fetch("/api/users/logout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    // If response is ok, redirect to homepage otherwise throw alert
+    if (res.ok) {
+      document.location.replace("/");
+    } else {
+      alert("Logout failed, please try again.");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+    alert("Something went wrong, please try again.");
+  }
+};
+
+// Applies event listener to logout id on main.handlebars
+document.querySelector("#logout").addEventListener("click", logoutFormHandler);

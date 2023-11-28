@@ -35,7 +35,6 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  // If the user is already logged in, redirect the user to homepage
   if (req.session.logged_in) {
     res.redirect("/");
     return;
@@ -44,7 +43,6 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-  // If the user is already logged in, redirect the user to homepage
   if (req.session.logged_in) {
     res.redirect("/");
     return;

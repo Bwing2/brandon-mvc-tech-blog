@@ -4,6 +4,7 @@ const { Users } = require("../../models");
 // Post route for login
 router.post("/login", async (req, res) => {
   try {
+    console.log(req.body.name);
     // Looks for valid name where it matches in req.body.name
     const userData = await Users.findOne({
       where: {
@@ -18,9 +19,10 @@ router.post("/login", async (req, res) => {
       return;
     }
 
-    // Looks for valid password matching in req.body.password
+    // Checks for valid password matching in userData req.body.password
     const validPassword = await userData.checkPassword(req.body.password);
 
+    console.log(validPassword);
     if (!validPassword) {
       res
         .status(400)
@@ -28,6 +30,7 @@ router.post("/login", async (req, res) => {
       return;
     }
 
+    // saves session user_id and logged_in status
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
@@ -51,7 +54,7 @@ router.post("/logout", (req, res) => {
   }
 });
 
-// Post route for signup
+// Post route for signup (/api/users/signup)
 router.post("/signup", async (req, res) => {
   try {
     const newUser = await Users.create({

@@ -1,0 +1,16 @@
+<h2>Edit Post</h2>
+
+<!-- form for editing post -->
+<form class="editForm">
+    <div class="entryDiv">
+        <label for="userTitleEdit">Post Title:</label>
+        <input class="formInput" type="text" id="userTitleEdit" value="{{post.title}}"/>
+    </div>
+    <div class="entryDiv">
+        <label for="userBodyEdit">Post Body:</label>
+        <input class="formInput" type="text" id ="userBodyEdit" value="{{post.post_content}}"/>
+    </div>
+    <div class="entryDiv">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</form>

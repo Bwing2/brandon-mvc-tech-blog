@@ -1,4 +1,9 @@
-<!-- For each post display the title, name, date_created, and post_content -->
+<h2>Dashboard</h2>
+
+<div class="createButton">
+    <a href="/create"><button>Create Post</button></a>
+</div>
+<!-- shows all posts that belong to user -->
 {{#each posts as |post|}}
 
 <section>
@@ -11,7 +16,7 @@
             <p>{{post.post_content}}</p>
         </div>
     </div>
-    
+<a href="/edit/{{post.id}}"><button>Edit This Post</button></a>
 </section>
 
 {{/each}}

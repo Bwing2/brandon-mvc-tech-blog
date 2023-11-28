@@ -1,5 +1,6 @@
 // Logs out user and brings them back to homepage if successful
-const logoutFormHandler = async () => {
+const logoutFormHandler = async (event) => {
+  event.preventDefault();
   try {
     const res = await fetch("/api/users/logout", {
       method: "POST",

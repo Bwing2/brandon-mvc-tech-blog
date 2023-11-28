@@ -68,4 +68,21 @@ router.get("/:id", withAuth, async (req, res) => {
   }
 });
 
+// Post request for creating a new post
+router.post("/create", withAuth, async (req, res) => {
+  try {
+    const newPost = await Posts.create({
+      title: req.body.title,
+      post_content: req.body.post_content,
+      user_id: req.session.user_id,
+    });
+    res.status(200).json(newPost);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+// Finish edit route js and layout file to work correctly
+router.put("/edit", withAuth, async (req, res) => {});
+
 module.exports = router;

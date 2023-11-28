@@ -2,16 +2,16 @@ const signUpFormHandler = async (event) => {
   event.preventDefault();
 
   // Looks for username email and password id's
-  const username = document.querySelector("#userSignUp").value.trim();
+  const name = document.querySelector("#userSignUp").value.trim();
   const email = document.querySelector("#emailSignUp").value.trim();
   const password = document.querySelector("#passwordSignUp").value.trim();
 
   // if they exist, send fetch request to
-  if (username && email && password) {
+  if (name && email && password) {
     try {
       const res = await fetch("/api/users/signup", {
         method: "POST",
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ name, email, password }),
         headers: { "Content-Type": "application/json" },
       });
 

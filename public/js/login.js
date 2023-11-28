@@ -2,18 +2,19 @@ const loginFormHandler = async (event) => {
   event.preventDefault();
 
   // Looks for username and password user these id's
-  const username = document.querySelector("#userLogin").value.trim();
+  const name = document.querySelector("#userLogin").value.trim();
   const password = document.querySelector("#passwordLogin").value.trim();
 
   // If they exist, send a fetch request to the database to log them in, otherwise go to homepage
-  if (username && password) {
+  if (name && password) {
     try {
       const res = await fetch("/api/users/login", {
         method: "POST",
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ name, password }),
         headers: { "Content-Type": "application/json" },
       });
 
+      console.log(res);
       // If response is ok, redirect to homepage otherwise throw alert
       if (res.ok) {
         document.location.replace("/");

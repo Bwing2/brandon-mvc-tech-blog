@@ -26,5 +26,5 @@ const deleteFormHandler = async (event) => {
 
 // Applies event listener to editForm class on edit.handlebars
 document
-  .querySelector(".editForm")
-  .addEventListener("submit", deleteFormHandler);
+  .querySelector("#deleteBtn")
+  .addEventListener("click", deleteFormHandler);

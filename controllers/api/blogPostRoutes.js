@@ -103,6 +103,7 @@ router.put("/edit/:id", withAuth, async (req, res) => {
   }
 });
 
+// Delete route for chosen post
 router.delete("/edit/:id", withAuth, async (req, res) => {
   try {
     // Updates title and post_content specifically where id matches req.params.id

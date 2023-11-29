@@ -35,7 +35,9 @@ router.post("/login", async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res.json({ user: userData, message: "You are now logged in!" });
+      res
+        .status(200)
+        .json({ user: userData, message: "You are now logged in!" });
     });
   } catch (err) {
     res.status(500).json(err);
@@ -66,8 +68,13 @@ router.post("/signup", async (req, res) => {
     req.session.save(() => {
       req.session.user_id = newUser.id;
       req.session.logged_in = true;
+
+      // Response is sent inside callback function passed to req.session.save(), and won't be sent until after the session is saved
+      res.status(200).json({
+        user: newUser,
+        message: "You are now signed up and logged in!",
+      });
     });
-    res.status(200).json(newUser);
   } catch (err) {
     res.status(500).json(err);
   }

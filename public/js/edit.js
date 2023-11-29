@@ -3,11 +3,14 @@ const editFormHandler = async (event) => {
 
   const title = document.querySelector("#userTitleEdit").value.trim();
   const post_content = document.querySelector("#userBodyEdit").value.trim();
+
+  // Need to target the number in the URL, so we split it using / to target the 2nd group which is the number
   const post_id = window.location.pathname.split("/")[2];
   console.log(post_id);
 
   if (title && post_content) {
     try {
+      // Use template literal to fetch different post_id numbers
       const res = await fetch(`/api/posts/edit/${post_id}`, {
         method: "PUT",
         body: JSON.stringify({ title, post_content }),

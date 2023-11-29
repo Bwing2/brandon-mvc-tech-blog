@@ -89,7 +89,6 @@ router.get("/create", withAuth, (req, res) => {
 // Get route for editing a specific post
 router.get("/edit/:id", withAuth, async (req, res) => {
   const post = await Posts.findOne({
-    // not working correctly !!!!!!!!!!!!!!!!!!!!
     where: {
       id: req.params.id,
     },

@@ -103,4 +103,18 @@ router.put("/edit/:id", withAuth, async (req, res) => {
   }
 });
 
+router.delete("/edit/:id", withAuth, async (req, res) => {
+  try {
+    // Updates title and post_content specifically where id matches req.params.id
+    const deletePost = await Posts.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json(deletePost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

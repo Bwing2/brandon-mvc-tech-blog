@@ -13,7 +13,8 @@ const createPostHandler = async (event) => {
       });
 
       console.log(res);
-      // If response is ok, redirect to homepage otherwise throw alert
+
+      // If response is ok, redirect to dashboard otherwise throw alert
       if (res.ok) {
         document.location.replace("/dashboard");
       } else {

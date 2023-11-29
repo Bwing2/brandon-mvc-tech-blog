@@ -78,11 +78,29 @@ router.post("/create", withAuth, async (req, res) => {
     });
     res.status(200).json(newPost);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 
-// Finish edit route js and layout file to work correctly
-router.put("/edit", withAuth, async (req, res) => {});
+// Put request for editing a specific post
+router.put("/edit/:id", withAuth, async (req, res) => {
+  try {
+    // Updates title and post_content specifically where id matches req.params.id
+    const editPost = await Posts.update(
+      {
+        title: req.body.title,
+        post_content: req.body.post_content,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    res.status(200).json(editPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;

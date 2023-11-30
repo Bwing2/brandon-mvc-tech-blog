@@ -55,52 +55,73 @@ router.get("/signup", (req, res) => {
 // Get route for dashboard page
 // looking specifically for where user_id matches the req.session.user_id
 router.get("/dashboard", withAuth, async (req, res) => {
-  const postData = await Posts.findAll({
-    where: {
-      user_id: req.session.user_id,
-    },
-    include: [
-      {
-        model: Users,
-        attributes: ["name"],
+  try {
+    const postData = await Posts.findAll({
+      where: {
+        user_id: req.session.user_id,
       },
-      {
-        model: Comments,
-        attributes: ["comment_content"],
-      },
-    ],
-  });
+      include: [
+        {
+          model: Users,
+          attributes: ["name"],
+        },
+        {
+          model: Comments,
+          attributes: ["comment_content"],
+        },
+      ],
+    });
 
-  // maps the data into a new array
-  const posts = postData.map((post) => post.get({ plain: true }));
-  res.render("dashboard", {
-    posts,
-    logged_in: req.session.logged_in,
-  });
+    // maps the data into a new array
+    const posts = postData.map((post) => post.get({ plain: true }));
+    res.render("dashboard", {
+      posts,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Please try again, an error has occured." });
+  }
 });
 
 // Get route for create page
 router.get("/create", withAuth, (req, res) => {
-  res.render("create", {
-    logged_in: req.session.logged_in,
-  });
+  try {
+    res.render("create", {
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Please try again, an error has occured." });
+  }
 });
 
-// COME BACK TO THIS DOESN'T WORK !!!!!!!!!!
 // Get route for editing a specific post
 router.get("/edit/:id", withAuth, async (req, res) => {
-  console.log(`ID: ${req.params.id}`);
-  const post = await Posts.findOne({
-    where: {
-      id: req.params.id,
-    },
-  });
-  // console.log(req.params.id);
-  console.log(post);
-  res.render("edit", {
-    post,
-    logged_in: req.session.logged_in,
-  });
+  try {
+    console.log(`ID: ${req.params.id}`);
+
+    const postData = await Posts.findByPk(req.params.id);
+
+    // Need a check if postData is null/unidentified otherwise get plain object from postData
+    if (!postData) {
+      return res.status(404).json({ message: "No post found with this id." });
+    }
+
+    const post = postData.get({ plain: true });
+    console.log(post);
+
+    res.render("edit", {
+      post,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Please try again, an error has occured." });
+  }
 });
 
 module.exports = router;

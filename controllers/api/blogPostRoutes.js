@@ -60,7 +60,7 @@ router.get("/:id", withAuth, async (req, res) => {
 
     console.log(posts);
 
-    res.render("blog", {
+    res.render("specificPost", {
       posts,
     });
   } catch (err) {

@@ -5,6 +5,7 @@ const addCommentHandler = async (event) => {
     .querySelector("#commentContent")
     .value.trim();
 
+  // Need to target URL number again after the /
   const post_id = window.location.pathname.split("/")[2];
 
   try {
@@ -17,7 +18,7 @@ const addCommentHandler = async (event) => {
     console.log(res);
     // If response is ok, redirect to dashboard otherwise throw alert
     if (res.ok) {
-      document.location.replace(`/api/posts/${post_id}`);
+      document.location.replace(`/posts/${post_id}`);
     } else {
       alert("Failed to add comment, please try again.");
     }

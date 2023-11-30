@@ -2,28 +2,6 @@ const router = require("express").Router();
 const { Posts, Comments, Users } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-// Get route for editing a specific post
-router.get("/edit/:id", withAuth, async (req, res) => {
-  try {
-    const postData = await Posts.findByPk(req.params.id);
-    console.log(postData);
-
-    // Need a check if postData is null/unidentified otherwise get plain object from postData
-    if (!postData) {
-      return res.status(404).json({ message: "No post found with this id." });
-    }
-
-    const post = postData.get({ plain: true });
-    console.log(post);
-
-    res.render("edit", {
-      post,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 // Post request for creating a new post
 router.post("/create", withAuth, async (req, res) => {
   try {

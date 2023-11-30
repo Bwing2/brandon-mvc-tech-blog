@@ -3,24 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Tech Blog</title>
 </head>
 <body>
     <header>
-        <section>
-            <h1>Tech Blog Website</h1>
-        </section>
-        <section class="postHeader">
+ 
+        <section class="mainHeader">
+        <div class="headerDiv">
             {{#if logged_in}}
-            <a href="/">Home</a>
-            <a href="/dashboard">Dashboard</a>
-            <a href="#" id="logout">Logout</a>
+            <div class="headerLinks">
+                <ul>
+                    <a href="/" class="links">Home</a>
+                    <a href="/dashboard" class="links">Dashboard</a>
+                    <a href="#" id="logout" class="links">Logout</a>
+                </ul>
+            </div>
+
             {{else}}
-            <a href="/">Home</a>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/login"id="login">Login</a>
+            <div class="headerLinks">
+                <ul>
+                    <a href="/" class="links">Home</a>
+                    <a href="/dashboard" class="links">Dashboard</a>
+                    <a href="/login" id="login" class="links">Login</a>
+                </ul>
+            </div>
             {{/if}}
+            <div id="websiteTitle">
+                <h1>Tech Blog Website</h1>
+            </div>
+            
+        </div>
+            
         </section>
 
     </header>
@@ -28,6 +42,12 @@
     <main>
         {{{body}}}
     </main>
+
+    <footer>
+        <div class="footerDiv">
+            <a href="https://github.com/Bwing2" class="links">Created by Brandon Wing</a>
+        </div> 
+    </footer>
 
     {{#if logged_in}}
     <script src="/js/logout.js"></script>

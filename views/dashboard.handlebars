@@ -1,7 +1,6 @@
-<h2>Dashboard</h2>
 
 <div class="createButton">
-    <a href="/create"><button>Create Post</button></a>
+    <a href="/create"><button id="createBtn">Create Post</button></a>
 </div>
 <!-- shows all posts that belong to user -->
 {{#each posts as |post|}}
@@ -15,8 +14,9 @@
         <div class="postBody">
             <p>{{post.post_content}}</p>
         </div>
+        <a href="/edit/{{post.id}}"><button>Edit This Post</button></a>
     </div>
-<a href="/edit/{{post.id}}"><button>Edit This Post</button></a>
+
 </section>
 
 {{/each}}

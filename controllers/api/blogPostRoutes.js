@@ -2,66 +2,22 @@ const router = require("express").Router();
 const { Posts, Comments, Users } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-// Checks user's session data and if they are logged in
-router.get("/", async (req, res) => {
+// Get route for editing a specific post
+router.get("/edit/:id", withAuth, async (req, res) => {
   try {
-    // Looks for all Posts and JOIN's it with Comments and Users
-    const postData = await Posts.findAll({
-      include: [
-        {
-          model: Users,
-          attributes: ["name"],
-        },
-        {
-          model: Comments,
-          attributes: ["comment_content"],
-        },
-      ],
-    });
+    const postData = await Posts.findByPk(req.params.id);
+    console.log(postData);
 
-    // maps the data into a new array
-    const posts = postData.map((post) => post.get({ plain: true }));
+    // Need a check if postData is null/unidentified otherwise get plain object from postData
+    if (!postData) {
+      return res.status(404).json({ message: "No post found with this id." });
+    }
 
-    console.log(posts);
+    const post = postData.get({ plain: true });
+    console.log(post);
 
-    // renders the homepage posts if user is logged in
-    res.render("homepage", {
-      posts,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// Route for getting specific post id and all comments related to it
-router.get("/:id", withAuth, async (req, res) => {
-  try {
-    const postData = await Posts.findByPk(req.params.id, {
-      include: [
-        {
-          model: Users,
-          attributes: ["id", "name"],
-        },
-        {
-          model: Comments,
-          attributes: ["comment_content"],
-          include: [
-            {
-              model: Users,
-              attributes: ["name"],
-            },
-          ],
-        },
-      ],
-    });
-
-    const posts = postData.get({ plain: true });
-
-    console.log(posts);
-
-    res.render("specificPost", {
-      posts,
+    res.render("edit", {
+      post,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -78,6 +34,7 @@ router.post("/create", withAuth, async (req, res) => {
     });
     res.status(200).json(newPost);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

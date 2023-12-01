@@ -1,6 +1,6 @@
 # Cool Ideas Blog - MVC Blog Website
 
-[Live Deploy Link]()
+[Live Deploy Link](https://brandon-mvc-tech-blog-cc4f8f869b6d.herokuapp.com/)
 
 ![Github License](https://img.shields.io/badge/License-MIT-green.svg)
 

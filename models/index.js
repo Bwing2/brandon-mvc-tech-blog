@@ -36,4 +36,5 @@ Users.hasMany(Comments, {
   onDelete: "CASCADE",
 });
 
+// test
 module.exports = { Posts, Comments, Users };

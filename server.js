@@ -19,7 +19,7 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 // Creates instance of express, and sets port
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 // Creates instance of handlebars with custom helpers
 const hbs = exphbs.create({ helpers });
@@ -57,7 +57,5 @@ app.use(routes);
 
 // Sync the sequelize models to database, won't drop or recreate tables if they exist already
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () =>
-    console.log(`Server listening on http://localhost:${PORT}`)
-  );
+  app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
 });

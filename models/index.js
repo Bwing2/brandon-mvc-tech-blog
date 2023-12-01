@@ -1,6 +1,6 @@
 const Posts = require("./BlogPosts");
 const Comments = require("./Comments");
-const Users = require("./users");
+const Users = require("./Users");
 
 // Post can belong to any user with the user_id as reference
 Posts.belongsTo(Users, {

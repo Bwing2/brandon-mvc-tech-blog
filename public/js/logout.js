@@ -11,7 +11,7 @@ const logoutFormHandler = async (event) => {
     if (res.ok) {
       document.location.replace("/");
     } else {
-      alert("Logout failed, please try again.");
+      alert("Failed to log out, please try again.");
     }
   } catch (err) {
     res.status(500).json(err);

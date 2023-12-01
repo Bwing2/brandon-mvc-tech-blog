@@ -28,7 +28,7 @@ const addCommentHandler = async (event) => {
   }
 };
 
-// Applies event listener to editForm class on edit.handlebars
+// Applies event listener to commentForm class on edit.handlebars
 document
   .querySelector(".commentForm")
   .addEventListener("submit", addCommentHandler);
